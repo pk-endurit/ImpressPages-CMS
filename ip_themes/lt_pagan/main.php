@@ -24,7 +24,7 @@
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
-<body<?php if ($site->managementState()) { echo ' class="manage"'; } ?> style="background-color: <?php echo $this->getThemeOption('backgroundColor') ?>;">
+<body<?php if ($site->managementState()) { echo ' class="manage"'; } ?> >
 
     <div class="container_12 wrapper <?php echo $this->getThemeOption('style') ?>">
         <header class="grid_12">
@@ -61,8 +61,8 @@
         <div class="clear"></div>
         <footer class="clearfix">
             <div class="grid_12 clearfix">
-                <?php echo $this->generateManagedString('ipThemeName', 'p', 'Theme "LT pagan"', 'left'); ?>
-                <?php echo $this->generateManagedText('ipSlogan', 'div', 'Drag &amp; drop with <a href="http://www.impresspages.org">ImpressPages CMS</a>', 'right'); ?>
+                <?php echo $this->generateManagedString('themeName', 'p', 'Theme "LT pagan"', 'left'); ?>
+                <?php echo $this->generateManagedText('slogan', 'div', 'Drag &amp; drop with <a href="http://www.impresspages.org">ImpressPages CMS</a>', 'right'); ?>
             </div>
         </footer>
     </div>
