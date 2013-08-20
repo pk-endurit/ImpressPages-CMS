@@ -55,6 +55,7 @@ class Backend extends \Ip\Controller
 
     public function downloadThemes()
     {
+        $parametersMod = \Ip\ServiceLocator::getParametersMod();
         $site = ServiceLocator::getSite();
 
         $request = ServiceLocator::getRequest();
@@ -63,7 +64,7 @@ class Backend extends \Ip\Controller
         $themes = $request->getPost('themes');
 
         if(!is_writable(BASE_DIR.THEME_DIR)){
-            header('HTTP/1.1 500 {{'.BASE_DIR . THEME_DIR.' directory is not writable. Please check your email and install theme manually.}}');
+            header('HTTP/1.1 500 '.BASE_DIR . THEME_DIR.' '. $parametersMod->getValue('standard', 'design', 'admin_translations', 'theme_write_error'));
             $site->setOutput('');
             return;
         }
@@ -167,7 +168,8 @@ class Backend extends \Ip\Controller
                 $configModel->setConfigValue(THEME, $option['name'], $value);
             }
 
-            // clean less cache
+            $lessCompiler = LessCompiler::instance();
+            $lessCompiler->clearCache(THEME);
 
             $data = array(
                 'status' => 'success'
