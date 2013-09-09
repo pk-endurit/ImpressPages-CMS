@@ -312,7 +312,7 @@ $(document).ready(function () {
     });
 
     $(window).resize(function () {
-        adjust(rows);
+        adjust(rows);t
     });
 
     adjust(rows);
