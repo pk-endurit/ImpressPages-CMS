@@ -39,7 +39,7 @@ class LessCompiler
 
         require_once BASE_DIR . LIBRARY_DIR . 'php/leafo/lessphp/lessc.inc.php';
         $lessc = new \lessc();
-        $lessc->setImportDir(BASE_DIR . THEME_DIR . $themeName);
+        $lessc->setImportDir(array(BASE_DIR . THEME_DIR . $themeName, BASE_DIR . LIBRARY_DIR . 'css/ipContent'));
         $lessc->setFormatter('compressed');
         $css = $lessc->compile($less);
         $css = "/* Edit {$lessFile}, not this file. */ " . $css;
@@ -87,32 +87,16 @@ class LessCompiler
 
     public function shouldRebuild($themeName)
     {
-        $lastBuildTime = $this->getLastBuildTime($themeName);
-        $items = glob(BASE_DIR . THEME_DIR . $themeName . '/less/*');
+        $items = $this->globRecursive(BASE_DIR . THEME_DIR . $themeName . '/*.less');
         if (!$items) {
             return false;
         }
-        $items = array_merge($items, glob(BASE_DIR . THEME_DIR . $themeName . '/*'));
 
-        for ($i = 0; $i < count($items); $i++) {
-
-            if (is_dir($items[$i])) {
-                $add = glob($items[$i] . "/*");
-                $items = array_merge($items, $add);
-            }
-        }
+        $lastBuildTime = $this->getLastBuildTime($themeName);
 
         foreach ($items as $path) {
-            if (preg_match('/[.]less$/', $path)) {
-
-                if (filemtime($path) > $lastBuildTime) {
-                    $debug = array(
-                        'filetime' => filemtime($path),
-                        'compileTime' => $lastBuildTime,
-                    );
-
-                    return true;
-                }
+            if (filemtime($path) > $lastBuildTime) {
+                return true;
             }
         }
 
@@ -157,5 +141,48 @@ class LessCompiler
         }
     }
 
+    /**
+     * Recursive glob function from PHP manual (http://php.net/manual/en/function.glob.php)
+     */
+    protected function globRecursive($pattern, $flags = 0)
+    {
+        $files = glob($pattern, $flags);
 
+        foreach (glob(dirname($pattern) . '/*', GLOB_ONLYDIR | GLOB_NOSORT) as $dir) {
+            $files = array_merge($files, $this->globRecursive($dir . '/' . basename($pattern), $flags));
+        }
+
+        return $files;
+    }
+
+    public function rebuildIpContent()
+    {
+        $items = $this->globRecursive(BASE_DIR . LIBRARY_DIR . 'css/ipContent/less/*.less');
+        if (!$items) {
+            return false;
+        }
+
+        $cssFile = BASE_DIR . LIBRARY_DIR . 'css/ipContent/ip_content.css';
+        $lastBuildTime = filemtime($cssFile);
+
+        $hasChanged = false;
+
+        foreach ($items as $path) {
+            if (filemtime($path) > $lastBuildTime) {
+                $hasChanged = true;
+                break;
+            }
+        }
+
+        if (!$hasChanged) {
+            return;
+        }
+
+        require_once BASE_DIR . LIBRARY_DIR . 'php/leafo/lessphp/lessc.inc.php';
+        $lessc = new \lessc();
+        $lessc->setImportDir(BASE_DIR . LIBRARY_DIR . 'css/ipContent');
+        $lessc->setPreserveComments(true);
+        $css = $lessc->compileFile(BASE_DIR . LIBRARY_DIR . 'css/ipContent/less/ipContent/ipContent.less');
+        file_put_contents($cssFile, $css);
+    }
 }
