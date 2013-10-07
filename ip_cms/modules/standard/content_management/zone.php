@@ -184,14 +184,7 @@ class Zone extends \Frontend\Zone
 
     private function makeElementFromDb($dbElement, $firstLevel)
     {
-        switch ($dbElement['type']) {
-            case 'action':
-                $newElement = new ActionElement($dbElement['id'], $this->getName());
-                break;
-            default:
-                $newElement = new Element($dbElement['id'], $this->getName());
-        }
-
+        $newElement = new Element($dbElement['id'], $this->getName());
         $newElement->hydrate($dbElement);
 
         if ($firstLevel) {
@@ -205,12 +198,6 @@ class Zone extends \Frontend\Zone
 
     public function makeActions()
     {
-        $element = $this->getCurrentElement();
-
-        if (get_class($element) != 'Modules\\standard\\content_management\\Element') {
-            $site = \Ip\ServiceLocator::getSite();
-
-            $site->setBlockContent('main', $element->generateContent());
-        }
+        $this->getCurrentElement()->makeActions();
     }
 }

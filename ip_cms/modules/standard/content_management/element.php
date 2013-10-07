@@ -20,6 +20,11 @@ require_once (__DIR__.'/site_db.php');
 
 class Element extends \Frontend\Element {
     protected $linkIgnoreRedirect;
+
+    /**
+     * @var string
+     */
+    protected $controllerAction;
     
     public function hydrate($dbElement)
     {
@@ -37,6 +42,15 @@ class Element extends \Frontend\Element {
         $this->setHtml($dbElement['html']);
         $this->setType($dbElement['type']);
         $this->setRedirectUrl($dbElement['redirect_url']);
+        $this->controllerAction = $dbElement['controllerAction'];
+    }
+
+    public function makeActions()
+    {
+        if ($this->controllerAction) {
+            $site = \Ip\ServiceLocator::getSite();
+            $site->setBlockContent('main', $this->generateContent());
+        }
     }
 
     public function getLink($ignoreRedirect = false) {
@@ -121,7 +135,23 @@ class Element extends \Frontend\Element {
         $this->linkIgnoreRedirect = $site->generateUrl($languageId, $this->zoneName, $urlVars);
     }
 
+    public function generateContent()
+    {
+        if ($this->controllerAction) {
+            $site = \Ip\ServiceLocator::getSite();
+            $controllerInfo = $site->_parseControllerAction($this->controllerAction, 'SiteController');
 
+            if (!class_exists($controllerInfo['controller'])) {
+                throw new \Ip\CoreException('Requested controller doesn\'t exist');
+            }
+
+            $controller = new $controllerInfo['controller']();
+
+            return $controller->$controllerInfo['action']();
+        } else {
+            return parent::generateContent();
+        }
+    }
 
 }
 
