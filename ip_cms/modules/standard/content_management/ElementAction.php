@@ -24,7 +24,7 @@ class ElementAction extends Element {
     public function generateContent()
     {
         $site = \Ip\ServiceLocator::getSite();
-        $controllerInfo = $site->parseControllerAction($this->action, 'SiteController');
+        $controllerInfo = $site->_parseControllerAction($this->action, 'SiteController');
 
         if (!class_exists($controllerInfo['controller'])) {
             throw new \Ip\CoreException('Requested controller doesn\'t exist');

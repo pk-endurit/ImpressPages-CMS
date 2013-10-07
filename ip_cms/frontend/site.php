@@ -830,7 +830,7 @@ class Site{
 
                 if ($actionString) {
 
-                    $controllerInfo = $this->parseControllerAction($actionString, $controllerClass);
+                    $controllerInfo = $this->_parseControllerAction($actionString, $controllerClass);
 
                     if (!class_exists($controllerInfo['controller'])) {
                         throw new \Ip\CoreException('Requested controller doesn\'t exist');
@@ -864,7 +864,16 @@ class Site{
 
     }
 
-    public function parseControllerAction($action, $controllerClass)
+    /**
+     * DO NOT USE THIS FUNCTION IN YOUR CODE.
+     *
+     * @deprecated
+     * @todo move to appropriate place
+     * @param $action
+     * @param $controllerClass
+     * @return array
+     */
+    public function _parseControllerAction($action, $controllerClass)
     {
         $parts = explode('.', $action);
         $module = array_shift($parts);
