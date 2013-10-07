@@ -23,7 +23,7 @@
 
     <p/>
 
-    <san class="error" id="redirectURLError"></san>
+    <span class="error" id="redirectURLError"></span>
     <p class="field">
         <input id="ipContentManagementTypeRedirect" class="stdModBox" name="type" value="redirect" <?php echo ($element->getType() == 'redirect' ? 'checked="checked"' : '' )?> type="radio" />
         <label for="ipContentManagementTypeRedirect" class="small">
