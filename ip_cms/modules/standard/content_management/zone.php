@@ -186,7 +186,7 @@ class Zone extends \Frontend\Zone
     {
         switch ($dbElement['type']) {
             case 'action':
-                $newElement = new ElementAction($dbElement['id'], $this->getName());
+                $newElement = new ActionElement($dbElement['id'], $this->getName());
                 break;
             default:
                 $newElement = new Element($dbElement['id'], $this->getName());

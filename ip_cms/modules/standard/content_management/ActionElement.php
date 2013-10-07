@@ -6,7 +6,7 @@
 namespace Modules\standard\content_management;
 
 
-class ElementAction extends Element {
+class ActionElement extends Element {
 
     protected $action;
 
