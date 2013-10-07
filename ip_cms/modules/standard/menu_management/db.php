@@ -180,6 +180,7 @@ class Db {
      * @param array $params
      */
     public static function updatePage($zoneName, $pageId, $params){
+
         global $site;
         $values = array();
 
@@ -255,6 +256,10 @@ class Db {
 
         if (isset($params['cached_text']))
         $values[] =  '`cached_text` = \''.mysql_real_escape_string($params['cached_text']).'\'';
+
+        if (array_key_exists('controllerAction', $params)) {
+            $values[] =  '`controllerAction` = \''.mysql_real_escape_string($params['controllerAction']).'\'';
+        }
 
         if (count($values) == 0) {
             return true; //nothing to update.

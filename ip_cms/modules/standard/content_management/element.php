@@ -53,6 +53,11 @@ class Element extends \Frontend\Element {
         }
     }
 
+    public function getControllerAction()
+    {
+        return $this->controllerAction;
+    }
+
     public function getLink($ignoreRedirect = false) {
         global $site;
         if ($site->managementState()) {

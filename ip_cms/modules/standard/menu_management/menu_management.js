@@ -556,6 +556,7 @@ function updatePage() {
   data.redirectURL = $('#formAdvanced input[name="redirectURL"]').val();
   data.rss = $('#formAdvanced input[name="rss"]').attr('checked') ? 1 : 0;
   data.layout = $('#formLayout select[name="layout"]').val();
+  data.controllerAction = $('#formLayout #ipsControllerAction').val();
 
   data.action = 'updatePage';
 

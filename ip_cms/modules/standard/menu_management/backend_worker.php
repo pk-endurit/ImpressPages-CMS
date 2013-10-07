@@ -391,6 +391,12 @@ class BackendWorker {
         $content = $this->_getPageDesignOptionsHtml($zone, $page, array('show_submit_button' => true));
         $tabs[] = array('title' => $title, 'content' => $content);
 
+        if (get_class($zone) == 'Modules\\standard\\content_management\\Zone') {
+            $title = 'Developer';
+            $content = $this->getDeveloperOptionsHtml($zone, $page);
+            $tabs[] = array('title' => $title, 'content' => $content);
+        }
+
 
         $answer = array();
         $answer['page'] = array();
@@ -438,6 +444,19 @@ class BackendWorker {
         }
 
         return \Ip\View::create('view/page_options_design.php', $data)->render();
+    }
+
+    /**
+     * @param $zone
+     * @param Element $page
+     * @return string content
+     */
+    private function getDeveloperOptionsHtml($zone, $page)
+    {
+        $data = array(
+            'controllerAction' => $page->getControllerAction(),
+        );
+        return \Ip\View::create('view/page_options_developer.php', $data)->render();
     }
 
 
