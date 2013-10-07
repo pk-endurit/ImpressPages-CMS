@@ -391,7 +391,7 @@ class BackendWorker {
         $content = $this->_getPageDesignOptionsHtml($zone, $page, array('show_submit_button' => true));
         $tabs[] = array('title' => $title, 'content' => $content);
 
-        if (get_class($zone) == 'Modules\\standard\\content_management\\Zone') {
+        if (\Ip\Backend::userHasPermission(\Ip\Backend::userId(), 'administrator', 'system')) {
             $title = 'Developer';
             $content = $this->getDeveloperOptionsHtml($zone, $page);
             $tabs[] = array('title' => $title, 'content' => $content);

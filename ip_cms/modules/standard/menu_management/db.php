@@ -257,7 +257,7 @@ class Db {
         if (isset($params['cached_text']))
         $values[] =  '`cached_text` = \''.mysql_real_escape_string($params['cached_text']).'\'';
 
-        if (array_key_exists('controllerAction', $params)) {
+        if (array_key_exists('controllerAction', $params) && \Ip\Backend::userHasPermission(\Ip\Backend::userId(), 'administrator', 'system')) {
             $values[] =  '`controllerAction` = \''.mysql_real_escape_string($params['controllerAction']).'\'';
         }
 
