@@ -147,6 +147,8 @@ class Zone extends \Frontend\Zone {
         } else {
             $newElement->setParentId($dbElement['parent']);
         }
+
+        return $newElement;
     }
 
     public function makeActions()
