@@ -42,7 +42,7 @@ class Element extends \Frontend\Element {
         $this->setHtml($dbElement['html']);
         $this->setType($dbElement['type']);
         $this->setRedirectUrl($dbElement['redirect_url']);
-        $this->controllerAction = $dbElement['controllerAction'];
+        $this->controllerAction = !empty($dbElement['controllerAction']) ? $dbElement['controllerAction'] : '';
     }
 
     public function makeActions()

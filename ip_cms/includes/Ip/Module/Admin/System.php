@@ -11,26 +11,25 @@ class System {
         $dispatcher = \Ip\ServiceLocator::getDispatcher();
 
         $dispatcher->bind('site.afterInit', array($this, 'initAdmin'));
-        $dispatcher->bind('site.beforeError404', array($this, 'catchAdminLogin'));
+        $dispatcher->bind('site.beforeError404', array($this, 'catchAdminUrls'));
 
     }
 
-    public function catchAdminLogin(\Ip\Event $event)
+    public function catchAdminUrls(\Ip\Event $event)
     {
-        if (
-            $_SERVER['REQUEST_URI'] == '/admin'
-            ||
-            $_SERVER['REQUEST_URI'] == '/admin/'
-            ||
-            $_SERVER['REQUEST_URI'] == '/admin.php'
-            ||
-            $_SERVER['REQUEST_URI'] == '/admin.php/'
+        $request = \Ip\ServiceLocator::getRequest();
+        $relativePath = $request->getRelativePath();
 
-        ) {
+        if (in_array($relativePath, array('admin', 'admin/', 'admin.php', 'admin.php/'))) {
             $event->addProcessed();
             self::$disablePanel = true;
             $controller = new \Ip\Module\Admin\SiteController();
             $controller->login();
+        }
+
+        if ('ip_backend_frames.php' == $relativePath) {
+            header('Location: ' . BASE_URL . 'admin');
+            exit();
         }
     }
 
@@ -40,8 +39,6 @@ class System {
         $config = \Ip\ServiceLocator::getConfig();
 
         if (!self::$disablePanel && ($site->managementState() || !empty($_SESSION['backend_session']['user_id']))) {
-            $site->addJavascriptContent('bodyMargin', "window.document.body.style.marginTop = '60px';", -1);
-
             $site->addCss($config->getCoreModuleUrl().'Admin/Public/admin.css');
 
             //add tool bar

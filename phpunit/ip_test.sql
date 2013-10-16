@@ -1,13 +1,32 @@
+-- phpMyAdmin SQL Dump
+-- version 3.5.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Oct 11, 2013 at 11:04 AM
+-- Server version: 5.5.32-0ubuntu0.13.04.1
+-- PHP Version: 5.4.9-4ubuntu2.3
 
-ALTER DATABASE  `[[[[database]]]]` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
--- Table structure
 
-DROP TABLE IF EXISTS `ip_cms_content_element`;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
--- Table structure
+--
+-- Database: `test`
+--
 
-CREATE TABLE IF NOT EXISTS `ip_cms_content_element` (
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ip_content_element`
+--
+
+CREATE TABLE IF NOT EXISTS `ip_content_element` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `row_number` double NOT NULL DEFAULT '0',
   `parent` int(11) DEFAULT NULL,
@@ -31,17 +50,15 @@ CREATE TABLE IF NOT EXISTS `ip_cms_content_element` (
   `type` varchar(255) NOT NULL DEFAULT 'default',
   `redirect_url` mediumtext,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=76 ;
 
+-- --------------------------------------------------------
 
--- Table structure
+--
+-- Table structure for table `ip_language`
+--
 
-DROP TABLE IF EXISTS `ip_cms_language`;
-
--- Table structure
-
-
-CREATE TABLE IF NOT EXISTS `ip_cms_language` (
+CREATE TABLE IF NOT EXISTS `ip_language` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `d_short` varchar(255) NOT NULL DEFAULT '',
   `d_long` varchar(255) NOT NULL DEFAULT '',
@@ -51,15 +68,15 @@ CREATE TABLE IF NOT EXISTS `ip_cms_language` (
   `code` varchar(255) NOT NULL,
   `text_direction` varchar(10) NOT NULL DEFAULT 'ltr',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=346 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_log`;
+--
+-- Table structure for table `ip_log`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_log` (
+CREATE TABLE IF NOT EXISTS `ip_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `module` varchar(255) NOT NULL COMMENT 'module group and name',
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -68,15 +85,15 @@ CREATE TABLE IF NOT EXISTS `ip_cms_log` (
   `value_int` int(11) DEFAULT NULL,
   `value_float` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18025 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_module`;
-   
--- Table structure
+--
+-- Table structure for table `ip_module`
+--
 
-CREATE TABLE IF NOT EXISTS `ip_cms_module` (
+CREATE TABLE IF NOT EXISTS `ip_module` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` int(11) NOT NULL DEFAULT '0',
   `row_number` int(11) NOT NULL DEFAULT '0',
@@ -87,44 +104,44 @@ CREATE TABLE IF NOT EXISTS `ip_cms_module` (
   `version` decimal(10,2) NOT NULL,
   `core` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=444 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_module_group`;
+--
+-- Table structure for table `ip_module_group`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_module_group` (
+CREATE TABLE IF NOT EXISTS `ip_module_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
   `row_number` int(11) NOT NULL DEFAULT '0',
   `admin` tinyint(1) NOT NULL DEFAULT '0',
   `translation` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=338 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_module_permission`;
+--
+-- Table structure for table `ip_module_permission`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_module_permission` (
+CREATE TABLE IF NOT EXISTS `ip_module_permission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_to_module_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(255) NOT NULL DEFAULT '',
   `value` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_m_administrator_email_queue`;
+--
+-- Table structure for table `ip_m_administrator_email_queue`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_m_administrator_email_queue` (
+CREATE TABLE IF NOT EXISTS `ip_m_administrator_email_queue` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` mediumtext NOT NULL,
   `to` varchar(255) NOT NULL,
@@ -141,15 +158,15 @@ CREATE TABLE IF NOT EXISTS `ip_cms_m_administrator_email_queue` (
   `file_names` mediumtext,
   `file_mime_types` mediumtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=728 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_m_administrator_repository_file`;
+--
+-- Table structure for table `ip_m_administrator_repository_file`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_m_administrator_repository_file` (
+CREATE TABLE IF NOT EXISTS `ip_m_administrator_repository_file` (
   `fileId` int(11) NOT NULL AUTO_INCREMENT,
   `filename` varchar(255) NOT NULL,
   `module` varchar(255) NOT NULL COMMENT 'Module group and module key which uses file resource. Eg. standard/content_management',
@@ -157,33 +174,31 @@ CREATE TABLE IF NOT EXISTS `ip_cms_m_administrator_repository_file` (
   `date` int(11) NOT NULL COMMENT 'Date, when this module started to use this resource.',
   PRIMARY KEY (`fileId`),
   KEY `filename` (`filename`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='File usage table. Track which modules uses which files' AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='File usage table. Track which modules uses which files' AUTO_INCREMENT=3 ;
 
+-- --------------------------------------------------------
 
--- Table structure
+--
+-- Table structure for table `ip_m_administrator_repository_reflection`
+--
 
-DROP TABLE IF EXISTS `ip_cms_m_administrator_repository_reflection`;
-
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_m_administrator_repository_reflection` (
+CREATE TABLE IF NOT EXISTS `ip_m_administrator_repository_reflection` (
   `reflectionId` int(11) NOT NULL AUTO_INCREMENT,
   `transformFingerprint` char(32) CHARACTER SET ascii COLLATE ascii_bin NOT NULL COMMENT 'unique cropping options key',
   `original` varchar(255) NOT NULL,
-  `reflection` varchar(255) NOT NULL COMMENT 'Cropped version of original file.',
+  `reflection` varchar(255) NOT NULL COMMENT 'Cropped version of image or otherwise duplicated original file.',
   `created` int(11) NOT NULL,
   PRIMARY KEY (`reflectionId`),
   KEY `transformFingerprint` (`transformFingerprint`,`original`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Cropped versions of original image file' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='Cropped versions of original image file or otherwise duplicated repository files' AUTO_INCREMENT=2 ;
 
+-- --------------------------------------------------------
 
--- Table structure
+--
+-- Table structure for table `ip_m_administrator_rss`
+--
 
-DROP TABLE IF EXISTS `ip_cms_m_administrator_rss`;
-
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_m_administrator_rss` (
+CREATE TABLE IF NOT EXISTS `ip_m_administrator_rss` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) DEFAULT NULL,
   `zone_key` varchar(255) DEFAULT NULL,
@@ -191,29 +206,29 @@ CREATE TABLE IF NOT EXISTS `ip_cms_m_administrator_rss` (
   `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `rss` mediumtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_m_community_newsletter`;
+--
+-- Table structure for table `ip_m_community_newsletter`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_m_community_newsletter` (
+CREATE TABLE IF NOT EXISTS `ip_m_community_newsletter` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `subject` varchar(255) DEFAULT NULL,
   `text` mediumtext,
   `language_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_m_community_newsletter_subscribers`;
+--
+-- Table structure for table `ip_m_community_newsletter_subscribers`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_m_community_newsletter_subscribers` (
+CREATE TABLE IF NOT EXISTS `ip_m_community_newsletter_subscribers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
   `verified` tinyint(1) NOT NULL DEFAULT '0',
@@ -221,15 +236,15 @@ CREATE TABLE IF NOT EXISTS `ip_cms_m_community_newsletter_subscribers` (
   `verification_code` varchar(32) DEFAULT NULL,
   `language_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_m_community_user`;
+--
+-- Table structure for table `ip_m_community_user`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_m_community_user` (
+CREATE TABLE IF NOT EXISTS `ip_m_community_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `login` varchar(255) DEFAULT NULL,
   `language_id` int(11) NOT NULL,
@@ -244,15 +259,15 @@ CREATE TABLE IF NOT EXISTS `ip_cms_m_community_user` (
   `warned_on` timestamp NULL DEFAULT NULL,
   `valid_until` timestamp NULL DEFAULT NULL COMMENT 'required for maintenance. Real date should be calculated in real time by last_login field.',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
--- Table structure
-  
-DROP TABLE IF EXISTS `ip_cms_m_content_management_widget`;
+-- --------------------------------------------------------
 
--- Table structure
+--
+-- Table structure for table `ip_m_content_management_widget`
+--
 
-CREATE TABLE IF NOT EXISTS `ip_cms_m_content_management_widget` (
+CREATE TABLE IF NOT EXISTS `ip_m_content_management_widget` (
   `widgetId` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '0',
   `layout` varchar(25) NOT NULL,
@@ -261,17 +276,15 @@ CREATE TABLE IF NOT EXISTS `ip_cms_m_content_management_widget` (
   `recreated` int(11) DEFAULT NULL COMMENT 'when last time the images were cropped freshly :)',
   `predecessor` int(11) DEFAULT NULL COMMENT 'Id of other widget that was duplicated to create this widget',
   PRIMARY KEY (`widgetId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=54 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- Table structure
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `ip_m_content_management_widget_instance`
+--
 
-
-DROP TABLE IF EXISTS `ip_cms_m_content_management_widget_instance`;
-
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_m_content_management_widget_instance` (
+CREATE TABLE IF NOT EXISTS `ip_m_content_management_widget_instance` (
   `instanceId` int(11) NOT NULL AUTO_INCREMENT,
   `revisionId` int(11) NOT NULL,
   `widgetId` int(11) NOT NULL,
@@ -281,55 +294,43 @@ CREATE TABLE IF NOT EXISTS `ip_cms_m_content_management_widget_instance` (
   `created` int(11) NOT NULL COMMENT 'unix timestamp',
   `deleted` int(11) DEFAULT NULL COMMENT 'unix timestamp',
   PRIMARY KEY (`instanceId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1974 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5150 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS `ip_cms_m_design` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `theme` varchar(100) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `value` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `theme` (`theme`,`name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+--
+-- Table structure for table `ip_m_developer_widget_sort`
+--
 
--- Table structure
-
-DROP TABLE IF EXISTS `ip_cms_m_developer_widget_sort`;
-
--- Table structure
-
-
-CREATE TABLE IF NOT EXISTS `ip_cms_m_developer_widget_sort` (
+CREATE TABLE IF NOT EXISTS `ip_m_developer_widget_sort` (
   `sortId` int(11) NOT NULL AUTO_INCREMENT,
   `widgetName` varchar(255) NOT NULL,
   `priority` int(11) NOT NULL DEFAULT '0',
   `deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'used for maintenance only',
   PRIMARY KEY (`sortId`),
   UNIQUE KEY `widgetName` (`widgetName`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_m_inline_value_global`;
+--
+-- Table structure for table `ip_m_inline_value_global`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_m_inline_value_global` (
+CREATE TABLE IF NOT EXISTS `ip_m_inline_value_global` (
   `module` varchar(100) NOT NULL,
   `key` varchar(100) NOT NULL,
   `value` text NOT NULL,
   PRIMARY KEY (`module`,`key`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_m_inline_value_language`;
+--
+-- Table structure for table `ip_m_inline_value_language`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_m_inline_value_language` (
+CREATE TABLE IF NOT EXISTS `ip_m_inline_value_language` (
   `module` varchar(100) NOT NULL,
   `key` varchar(100) NOT NULL,
   `languageId` int(11) NOT NULL,
@@ -337,13 +338,13 @@ CREATE TABLE IF NOT EXISTS `ip_cms_m_inline_value_language` (
   PRIMARY KEY (`module`,`key`,`languageId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_m_inline_value_page`;
+--
+-- Table structure for table `ip_m_inline_value_page`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_m_inline_value_page` (
+CREATE TABLE IF NOT EXISTS `ip_m_inline_value_page` (
   `module` varchar(100) NOT NULL,
   `key` varchar(100) NOT NULL,
   `languageId` int(11) NOT NULL,
@@ -352,27 +353,14 @@ CREATE TABLE IF NOT EXISTS `ip_cms_m_inline_value_page` (
   `value` text NOT NULL,
   PRIMARY KEY (`module`,`key`,`languageId`,`zoneName`,`pageId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
--- Table structure
 
-DROP TABLE IF EXISTS `ip_cms_page_layout`;
+-- --------------------------------------------------------
 
--- Table structure
+--
+-- Table structure for table `ip_parameter`
+--
 
-CREATE TABLE IF NOT EXISTS `ip_cms_page_layout` (
-  `group_name` varchar(128) NOT NULL,
-  `module_name` varchar(128) NOT NULL,
-  `page_id` int(11) unsigned NOT NULL,
-  `layout` varchar(255) NOT NULL,
-  UNIQUE KEY `group_name` (`group_name`,`module_name`,`page_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Custom page layouts';
-
--- Table structure
-
-DROP TABLE IF EXISTS `ip_cms_parameter`;
-
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_parameter` (
+CREATE TABLE IF NOT EXISTS `ip_parameter` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
   `admin` tinyint(1) NOT NULL DEFAULT '0',
@@ -383,15 +371,15 @@ CREATE TABLE IF NOT EXISTS `ip_cms_parameter` (
   `comment` varchar(255) DEFAULT NULL,
   `type` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=578 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_parameter_group`;
+--
+-- Table structure for table `ip_parameter_group`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_parameter_group` (
+CREATE TABLE IF NOT EXISTS `ip_parameter_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
   `module_id` int(11) DEFAULT NULL,
@@ -399,83 +387,83 @@ CREATE TABLE IF NOT EXISTS `ip_cms_parameter_group` (
   `row_number` int(11) NOT NULL DEFAULT '0',
   `translation` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=67 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_par_bool`;
+--
+-- Table structure for table `ip_par_bool`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_par_bool` (
+CREATE TABLE IF NOT EXISTS `ip_par_bool` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `value` tinyint(1) DEFAULT NULL,
   `parameter_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=29 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_par_integer`;
+--
+-- Table structure for table `ip_par_integer`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_par_integer` (
+CREATE TABLE IF NOT EXISTS `ip_par_integer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `value` int(11) DEFAULT NULL,
   `parameter_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=32 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_par_lang`;
+--
+-- Table structure for table `ip_par_lang`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_par_lang` (
+CREATE TABLE IF NOT EXISTS `ip_par_lang` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `translation` mediumtext NOT NULL,
   `language_id` int(11) DEFAULT NULL,
   `parameter_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=173 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_par_string`;
+--
+-- Table structure for table `ip_par_string`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_par_string` (
+CREATE TABLE IF NOT EXISTS `ip_par_string` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `value` mediumtext NOT NULL,
   `parameter_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=433 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_revision`;
+--
+-- Table structure for table `ip_revision`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_revision` (
+CREATE TABLE IF NOT EXISTS `ip_revision` (
   `revisionId` int(11) NOT NULL AUTO_INCREMENT,
   `zoneName` varchar(25) NOT NULL,
   `pageId` int(11) NOT NULL DEFAULT '0',
   `published` tinyint(1) NOT NULL DEFAULT '0',
   `created` int(11) NOT NULL,
   PRIMARY KEY (`revisionId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=89 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=439 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_user`;
+--
+-- Table structure for table `ip_user`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_user` (
+CREATE TABLE IF NOT EXISTS `ip_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
   `pass` varchar(32) NOT NULL DEFAULT '',
@@ -484,42 +472,42 @@ CREATE TABLE IF NOT EXISTS `ip_cms_user` (
   `e_mail` varchar(255) NOT NULL DEFAULT '',
   `row_number` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_user_to_mod`;
+--
+-- Table structure for table `ip_user_to_mod`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_user_to_mod` (
+CREATE TABLE IF NOT EXISTS `ip_user_to_mod` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL DEFAULT '0',
   `module_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=537 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_variables`;
+--
+-- Table structure for table `ip_variables`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_variables` (
+CREATE TABLE IF NOT EXISTS `ip_variables` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT 'module group and name',
   `value` text,
   `modified_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=45 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_zone`;
+--
+-- Table structure for table `ip_zone`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_zone` (
+CREATE TABLE IF NOT EXISTS `ip_zone` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `row_number` int(11) NOT NULL DEFAULT '0',
   `name` varchar(30) NOT NULL DEFAULT '',
@@ -528,15 +516,15 @@ CREATE TABLE IF NOT EXISTS `ip_cms_zone` (
   `associated_group` varchar(255) DEFAULT NULL,
   `associated_module` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=112 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_zone_parameter`;
+--
+-- Table structure for table `ip_zone_parameter`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_zone_parameter` (
+CREATE TABLE IF NOT EXISTS `ip_zone_parameter` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` mediumtext,
   `keywords` mediumtext,
@@ -546,19 +534,22 @@ CREATE TABLE IF NOT EXISTS `ip_cms_zone_parameter` (
   `language_id` int(11) DEFAULT NULL,
   `translation` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=639 ;
 
--- Table structure
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `ip_cms_zone_to_content`;
+--
+-- Table structure for table `ip_zone_to_content`
+--
 
--- Table structure
-
-CREATE TABLE IF NOT EXISTS `ip_cms_zone_to_content` (
+CREATE TABLE IF NOT EXISTS `ip_zone_to_content` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL DEFAULT '0',
   `zone_id` int(11) NOT NULL DEFAULT '0',
   `element_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='tells how mutch elements have language' ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='tells how mutch elements have language' AUTO_INCREMENT=168 ;
 
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
