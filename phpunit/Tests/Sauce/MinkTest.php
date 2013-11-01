@@ -5,6 +5,8 @@
 
 namespace Tests\Sauce;
 
+use PhpUnit\Helper\TestEnvironment;
+
 class MinkTest extends \PHPUnit_Framework_TestCase
 {
     /**
