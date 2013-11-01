@@ -164,33 +164,10 @@ $table[] = '';
 $table[] = '';
 
 
-$table[] = '<b>/audio/</b> '.IP_WRITABLE.' '.IP_SUBDIRECTORIES;
-if(!directory_is_writable(dirname(__FILE__).'/../audio')) {
-    $table[] = '<span class="error">'.IP_ERROR."</span>";
-    $error['writable_audio'] = 1;
-}else
-$table[] = '<span class="correct">'.IP_OK.'</span>';
-
-
 $table[] = '<b>/file/</b> '.IP_WRITABLE.' '.IP_SUBDIRECTORIES;
 if(!directory_is_writable(dirname(__FILE__).'/../file')) {
     $table[] = '<span class="error">'.IP_ERROR."</span>";
     $error['writable_file'] = 1;
-}else
-$table[] = '<span class="correct">'.IP_OK.'</span>';
-
-
-$table[] = '<b>/image/</b> '.IP_WRITABLE.' '.IP_SUBDIRECTORIES;
-if(!directory_is_writable(dirname(__FILE__).'/../image')) {
-    $table[] = '<span class="error">'.IP_ERROR."</span>";
-    $error['writable_image'] = 1;
-}else
-$table[] = '<span class="correct">'.IP_OK.'</span>';
-
-$table[] = '<b>/video/</b> '.IP_WRITABLE.' '.IP_SUBDIRECTORIES;
-if(!directory_is_writable(dirname(__FILE__).'/../video')) {
-    $table[] = '<span class="error">'.IP_ERROR."</span>";
-    $error['writable_video'] = 1;
 }else
 $table[] = '<span class="correct">'.IP_OK.'</span>';
 

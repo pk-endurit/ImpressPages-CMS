@@ -303,9 +303,6 @@ if(isset($_POST['action']) && $_POST['action'] == 'config'){
             ),
             'comment' => 'Database configuration',
         ),
-        'DB_PREF' => array(
-            'value' => $_SESSION['db_prefix'],
-        ),
         // END DB
     );
 
@@ -324,7 +321,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'config'){
  * @package ImpressPages
  */
 
- return array(" . $config . ");";
+ return array(" . $config . "\n);";
 
     $myFile = "../ip_config.php";
     $fh = fopen($myFile, 'w') or die('{errorCode:"ERROR_CONFIG", error:""}');
