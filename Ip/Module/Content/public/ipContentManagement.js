@@ -9,8 +9,9 @@ $(document).ready(function() {
     $ipObject = $(document);
 
     $ipObject.bind('initFinished.ipContentManagement', ipAdminPanelInit);
-    $ipObject.bind('initFinished.ipContentManagement', ipAdminWidgetsScroll);
-    $(window).bind('resizeEnd',                        ipAdminWidgetsScroll);
+    //TODOX reenable
+//    $ipObject.bind('initFinished.ipContentManagement', ipAdminWidgetsScroll);
+//    $(window).bind('resizeEnd',                        ipAdminWidgetsScroll);
     $ipObject.bind('initFinished.ipContentManagement', ipAdminWidgetsSearch);
 
     $ipObject.ipContentManagement();

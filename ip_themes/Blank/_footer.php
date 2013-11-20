@@ -16,8 +16,8 @@
 </div>
 <?php
     ipAddJQuery();
-    ipAddThemeAsset('colorbox/jquery.colorbox.js');
-    ipAddThemeAsset('site.js');
+    //ipAddThemeAsset('colorbox/jquery.colorbox.js');
+    //TODOX fix lightbox ipAddThemeAsset('site.js');
     ipPrintJavascript();
 ?>
 </body>

@@ -60,9 +60,9 @@ class PublicController extends \Ip\Controller
         ipAddJavascript(ipConfig()->coreModuleUrl('Assets/assets/js/jquery-ui/jquery-ui.js'));
         ipAddCss(ipConfig()->coreModuleUrl('Assets/assets/js/jquery-ui/jquery-ui.css'));
 
-        ipAddJavascript(ipConfig()->coreModuleUrl('Assets/assets/js/jquery-tools/jquery.tools.ui.scrollable.js'));
+        //TODOX enable ipAddJavascript(ipConfig()->coreModuleUrl('Assets/assets/js/jquery-tools/jquery.tools.ui.scrollable.js'));
 
-        ipAddJavascript(ipConfig()->coreModuleUrl('Assets/assets/js/tiny_mce/jquery.tinymce.js'));
+        ipAddJavascript(ipConfig()->coreModuleUrl('Assets/assets/js/tiny_mce/jquery.tinymce.min.js'));
 
         ipAddJavascript(ipConfig()->coreModuleUrl('Assets/assets/js/plupload/plupload.full.js'));
         ipAddJavascript(ipConfig()->coreModuleUrl('Assets/assets/js/plupload/plupload.browserplus.js'));

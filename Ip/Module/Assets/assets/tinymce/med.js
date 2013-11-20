@@ -1,6 +1,6 @@
 ipTinyMceConfigMed = {
     // Location of TinyMCE script
-    script_url : ip.baseUrl + 'Ip/Module/Assets/assets/js/tiny_mce/tiny_mce.js',
+    script_url : ip.baseUrl + 'Ip/Module/Assets/assets/js/tiny_mce/tinymce.min.js',
     
     theme : "advanced",
     plugins : "paste,inlinepopups,iplink,simplebrowser,advhr,advimage,autoresize",
